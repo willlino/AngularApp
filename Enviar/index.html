@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>User Control</title>
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        	<div class="navbar-header">
+          	<a class="navbar-brand" href="#/">
+          		User Control
+        	</a>
+      	    </div>
+      	    <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#/">Home</a></li>
+            <li><a href="#contact">Contact</a></li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+	<div class="container">
+		<div ng-view></div>
+	</div>	
+    
+  <script src="./assets/libs/jquery.min.js"></script>
+  <script src="./assets/libs/bootstrap.min.js"></script>
+	<script src="./assets/libs/angular.min.js"></script>
+	<script src="./assets/libs/angular-route.min.js"></script>
+
+	<script src="app/app.module.js"></script>
+	<script src="app/app.routes.js"></script>
+
+	<script src="app/components/home/homeController.js"></script>
+	<script src="app/components/contact/contactController.js"></script>
+	<script src="app/components/contact/contactFactory.js"></script>
+	<script type="text/javascript">
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div class="col-md-8">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">Name</th>
+				<th class="text-center">Phone</th>
+				<th class="text-center">Username</th>
+				<th class="text-center"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="c in contacts">
+				<td>{{ c.name }}</td>
+				<td>{{ c.phone }}</td>
+				<td>{{ c.username }}</td>
+				<td class="text-center">
+					<div class="btn-group">
+						<button class="btn btn-info btn-sm" ng-click="editContact(c)">EDIT</button>
+						<button class="btn btn-danger btn-sm" ng-click="deleteContact(c)">DELETE</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
