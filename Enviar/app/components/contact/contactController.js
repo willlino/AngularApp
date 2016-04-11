@@ -5,6 +5,7 @@
 		$scope.contact = {
 		}
 		$scope.btnAddContactText = "Add Contact";
+		$scope.showDetails = false;
 
 		// If it is like this, it will execute when the controller is initialized
 		$scope.contacts = getContacts();
@@ -24,6 +25,10 @@
 
 		$scope.delete = function(contact){
 			deleteContact(contact);
+		}
+
+		$scope.showHideDetails = function(contactId){
+			showHideDetails(contactId);
 		}
 
 
@@ -124,6 +129,12 @@
 
 		function changeContactButtonVisibility(){
 			$scope.contactFormVisible = !$scope.contactFormVisible;
+		}
+
+		function showHideDetails(id){
+			var showDetailsId = 'showDetails' + id;
+
+			$scope[showDetailsId] = !$scope[showDetailsId];
 		}
 	});
 })()

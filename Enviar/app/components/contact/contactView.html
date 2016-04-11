@@ -46,21 +46,45 @@
 				<th class="text-center">Username</th>
 				<th class="text-center">Website</th>
 				<th class="text-center"></th>
+				<th class="text-center"></th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr ng-repeat="c in contacts">
+		<tbody ng-repeat="c in contacts">
+			<tr>
 				<td>{{ c.id }}</td>
 				<td>{{ c.name }}</td>
 				<td>{{ c.email }}</td>
 				<td>{{ c.phone }}</td>
 				<td>{{ c.username }}</td>
 				<td>{{ c.website }}</td>
+				<td><button class="btn btn-success btn-xs" ng-click="showHideDetails(c.id)">Address</button></td>
 				<td class="text-center">
 					<div class="btn-group">
 						<button class="btn btn-info btn-sm" ng-click="edit(c)">EDIT</button>
 						<button class="btn btn-danger btn-sm" ng-click="delete(c)">DELETE</button>
 					</div>
+				</td>
+			</tr>
+			<tr class="sub" ng-show="{{'showDetails' + c.id }}" >
+				<td></td>
+				<td colspan="7">
+					<table class="table table-striped">
+						<thead>
+							<th class="text-center">Street</th>
+							<th class="text-center">Suite</th>
+							<th class="text-center">City</th>
+							<th class="text-center">Zipcode</th>
+							<th class="text-center">Geo</th>
+						</thead>
+							<tr>
+								<td>{{c.address.street}}</td>
+								<td>{{c.address.suite}}</td>
+								<td>{{c.address.city}}</td>
+								<td>{{c.address.zipcode}}</td>
+								<td>{{c.address.geo}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</td>
 			</tr>
 		</tbody>
