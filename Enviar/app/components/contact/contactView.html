@@ -23,6 +23,29 @@
 					<input type="text" class="form-control" id="website" ng-model="contact.website" />
 				</div>
 				<div class="clearfix"></div>
+				<br/>
+				<my-address-form contact='contact'/>
+				<div class="clearfix"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<label>Company</label>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-2">
+							<label for="name">Name:</label>
+							<input type="text" class="form-control" id="phone" ng-model="contact.company.name"/>
+						</div>
+						<div class="col-md-2">
+							<label for="bs">Corporate Bullshit:</label>
+							<input type="text" class="form-control" id="bs" ng-model="contact.company.bs"/>
+						</div>
+						<div class="col-md-2">
+							<label for="catchPhrase">Catch Phrase:</label>
+							<input type="text" class="form-control" id="catchPhrase" ng-model="contact.company.catchPhrase" />
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
 				<br />
 				<div id="actions" class="row">
 					<div class="col-md-12">
@@ -57,7 +80,8 @@
 				<td>{{ c.phone }}</td>
 				<td>{{ c.username }}</td>
 				<td>{{ c.website }}</td>
-				<td><button class="btn btn-success btn-xs" ng-click="showHideDetails(c.id)">Address</button></td>
+				<td><button class="btn btn-success btn-xs" ng-click="showHideAddress(c.id)">Address</button></td>
+				<td><button class="btn btn-success btn-xs" ng-click="showHideCompany(c.id)">Company</button></td>
 				<td class="text-center">
 					<div class="btn-group">
 						<button class="btn btn-info btn-sm" ng-click="edit(c)">EDIT</button>
@@ -65,7 +89,7 @@
 					</div>
 				</td>
 			</tr>
-			<tr class="sub" ng-show="{{'showDetails' + c.id }}" >
+			<tr class="sub" ng-show="{{'showAddress' + c.id }}" >
 				<td></td>
 				<td colspan="7">
 					<table class="table table-striped">
@@ -75,13 +99,44 @@
 							<th class="text-center">City</th>
 							<th class="text-center">Zipcode</th>
 							<th class="text-center">Geo</th>
+							<th class="text-center"></th>
 						</thead>
+						<tbody>
 							<tr>
 								<td>{{c.address.street}}</td>
 								<td>{{c.address.suite}}</td>
 								<td>{{c.address.city}}</td>
 								<td>{{c.address.zipcode}}</td>
 								<td>{{c.address.geo}}</td>
+								<td class="text-center">
+									<div class="btn-group">
+										<button class="btn btn-info btn-sm" ng-click="editAddress(c)">EDIT</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr class="sub" ng-show="{{'showCompany' + c.id }}" >
+				<td></td>
+				<td colspan="7">
+					<table class="table table-striped">
+						<thead>
+							<th class="text-center">Name</th>
+							<th class="text-center">Corporate Bullshit</th>
+							<th class="text-center">Catch Phrase</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{c.company.name}}</td>
+								<td>{{c.company.bs}}</td>
+								<td>{{c.company.catchPhrase}}</td>
+								<td class="text-center">
+									<div class="btn-group">
+										<button class="btn btn-info btn-sm" ng-click="editCompany(c)">EDIT</button>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>

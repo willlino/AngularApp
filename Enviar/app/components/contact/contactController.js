@@ -5,7 +5,8 @@
 		$scope.contact = {
 		}
 		$scope.btnAddContactText = "Add Contact";
-		$scope.showDetails = false;
+		$scope.showAddress = false;
+		$scope.showCompany = false;
 
 		// If it is like this, it will execute when the controller is initialized
 		$scope.contacts = getContacts();
@@ -27,8 +28,12 @@
 			deleteContact(contact);
 		}
 
-		$scope.showHideDetails = function(contactId){
-			showHideDetails(contactId);
+		$scope.showHideAddress = function(contactId){
+			showHideAddress(contactId);
+		}
+
+		$scope.showHideCompany = function(contactId){
+			showHideCompany(contactId);
 		}
 
 
@@ -92,7 +97,9 @@
 				email: "",
 				phone: "",
 			    username: "",
-				website: ""
+				website: "",
+				address: {},
+				company: {}
 			};
 
 			showHideContactForm();
@@ -106,11 +113,14 @@
 				email: contact.email,
 				phone: contact.phone,
 			    username: contact.username,
-				website: contact.website
+				website: contact.website,
+				address: contact.address,
+				company: contact.company
 			};
 
 			$scope.contactFormVisible = true;
 			$scope.btnAddContactText = "Cancel";
+			console.log(contact);
 		}
 
 		function showHideContactForm(){
@@ -131,10 +141,16 @@
 			$scope.contactFormVisible = !$scope.contactFormVisible;
 		}
 
-		function showHideDetails(id){
-			var showDetailsId = 'showDetails' + id;
+		function showHideAddress(id){
+			var showAddressId = 'showAddress' + id;
 
-			$scope[showDetailsId] = !$scope[showDetailsId];
+			$scope[showAddressId] = !$scope[showAddressId];
+		}
+
+		function showHideCompany(id){
+			var showCompanyId = 'showCompany' + id;
+
+			$scope[showCompanyId] = !$scope[showCompanyId];
 		}
 	});
 })()
