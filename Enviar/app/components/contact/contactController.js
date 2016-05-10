@@ -9,7 +9,7 @@
 		$scope.showCompany = false;
 
 		// If it is like this, it will execute when the controller is initialized
-		$scope.contacts = getContacts();
+		getContacts();
 
 		// If it is like this, it will execute only when the function is called
 		$scope.save = function(){
@@ -153,4 +153,4 @@
 			$scope[showCompanyId] = !$scope[showCompanyId];
 		}
 	});
-})()
+})();
