@@ -1,39 +1,95 @@
+<button class="btn btn-success" ng-click="add()" id="btnAddContact">{{ btnAddContactText }}</button><br/><br/>
 <div ng-show="contactFormVisible" class="panel panel-default">
 	<div class="panel-body">
-		<form class="form-horizontal">
-			<fieldset>
+		<fieldset>
+			<form name="contactForm" class="form-horizontal">
 				<div class="col-md-2">
 					<label for="name">Name:</label>
-					<input type="text" class="form-control" id="name" ng-model="contact.name"/>
+					<input type="text" class="form-control" id="name" name="name" ng-model="contact.name" ng-required="true"/>
 				</div>
 				<div class="col-md-2">
 					<label for="email">Email:</label>
-					<input type="email" class="form-control" id="email" ng-model="contact.email"/>
+					<input type="email" class="form-control" id="email" name="email" ng-model="contact.email" ng-required="true" ng-pattern="/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/"/>
 				</div>
 				<div class="col-md-2">
 					<label for="phone">Phone:</label>
-					<input type="tel" class="form-control" id="phone" ng-model="contact.phone"/>
+					<input type="tel" class="form-control" id="phone" name="phone" ng-model="contact.phone" ng-required="true"/>
 				</div>
 				<div class="col-md-2">
 					<label for="username">Username:</label>
-					<input type="text" class="form-control" id="username" ng-model="contact.username"/>
+					<input type="text" class="form-control" id="username" name="username" ng-model="contact.username" ng-required="true"/>
 				</div>
 				<div class="col-md-2">
 					<label for="website">Website:</label>
-					<input type="text" class="form-control" id="website" ng-model="contact.website" />
+					<input type="text" class="form-control" id="website" name="website" ng-model="contact.website"/>
 				</div>
 				<div class="clearfix"></div>
 				<br/>
-				<my-address-form contact='contact'/>
-				<div class="clearfix"></div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<label>Company</label>
-					</div>
+				<!--Error messages-->
+				<div ng-show="contactForm.name.$error.required && contactForm.name.$dirty" class="alert alert-danger">
+					The field "Name" must not be empty.
+				</div>
+				<div ng-show="contactForm.email.$error.required && contactForm.email.$dirty" class="alert alert-danger">
+					The field "Email" must not be empty.
+				</div>
+				<div ng-show="contactForm.email.$error.pattern" class="alert alert-danger">
+					The field "Email" must be in email format.
+				</div>
+				<div ng-show="contactForm.phone.$error.required && contactForm.phone.$dirty" class="alert alert-danger">
+					The field "Phone" must not be empty.
+				</div>
+				<div ng-show="contactForm.username.$error.required && contactForm.username.$dirty" class="alert alert-danger">
+					The field "Username" must not be empty.
+				</div>
+			</form>
+			<div class="clearfix"></div>
+			<br/>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label>Address</label><label></label>
+				</div>
+				<form name="addressForm">
 					<div class="panel-body">
 						<div class="col-md-2">
+							<label for="city">City:</label>
+							<input type="text" class="form-control" id="city" name="city" ng-model="contact.address.city" ng-required="true"/>
+						</div>
+						<!--GEO-->
+						<div class="col-md-2">
+							<label for="street">Street:</label>
+							<input type="text" class="form-control" id="street" name="street" ng-model="contact.address.street" ng-required="true"/>
+						</div>
+						<div class="col-md-2">
+							<label for="suite">Suite:</label>
+							<input type="text" class="form-control" id="suite" name="suite" ng-model="contact.address.suite"/>
+						</div>
+						<div class="col-md-2">
+							<label for="zipcode">Zip Code:</label>
+							<input type="text" class="form-control" id="zipcode" name="zipcode" ng-model="contact.address.zipcode" ng-required="true"/>
+						</div>
+					</div>
+				</form>
+				<!--Error messages-->
+				<div ng-show="addressForm.city.$error.required && addressForm.city.$dirty" class="alert alert-danger">
+					The field "City" must not be empty.
+				</div>
+				<div ng-show="addressForm.street.$error.required && addressForm.street.$dirty" class="alert alert-danger">
+					The field "Street" must not be empty.
+				</div>
+				<div ng-show="addressForm.zipcode.$error.required && addressForm.zipcode.$dirty" class="alert alert-danger">
+					The field "Zip Code" must not be empty.
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label>Company</label>
+				</div>
+				<div class="panel-body">
+					<form name="companyForm">
+						<div class="col-md-2">
 							<label for="name">Name:</label>
-							<input type="text" class="form-control" id="phone" ng-model="contact.company.name"/>
+							<input type="text" class="form-control" id="phone" ng-model="contact.company.name" ng-required="true"/>
 						</div>
 						<div class="col-md-2">
 							<label for="bs">Corporate Bullshit:</label>
@@ -41,26 +97,42 @@
 						</div>
 						<div class="col-md-2">
 							<label for="catchPhrase">Catch Phrase:</label>
-							<input type="text" class="form-control" id="catchPhrase" ng-model="contact.company.catchPhrase" />
+							<input type="text" class="form-control" id="catchPhrase" ng-model="contact.company.catchPhrase" ng-required="true"/>
 						</div>
+					</form>
+					<!--Error Messages-->
+					<div ng-show="companyForm.name.$error.required && companyForm.name.$dirty" class="alert alert-danger">
+						The field "Name" must not be empty.
+					</div>
+					<div ng-show="companyForm.catchPhrase.$error.required && companyForm.catchPhrase.$dirty" class="alert alert-danger">
+						The field "Catch Phrase" must not be empty.
 					</div>
 				</div>
-				<div class="clearfix"></div>
-				<br />
-				<div id="actions" class="row">
-					<div class="col-md-12">
-						<button class="btn btn-primary" ng-click="save()">Save</button>
-						<button class="btn btn-default">Cancel</button>
-					</div>
+			</div>
+			<div class="clearfix"></div>
+			<br />
+			<div id="actions" class="row">
+				<div class="col-md-12">
+					<button class="btn btn-primary" ng-click="save()">Save</button>
 				</div>
-			</fieldset>
-		</form>
+			</div>
+		</fieldset>
 	</div>
 </div>
-<button class="btn btn-success" ng-click="add()" id="btnAddContact">{{ btnAddContactText }}</button>
 <div class="col-md-12">
 	<table class="table table-striped">
 		<thead>
+			<tr>
+				<td><input class="form-control" type="text" ng-model="searchForId" placeholder="Id"/></td>
+				<td><input class="form-control" type="text" ng-model="searchForName" placeholder="Name"/></td>
+				<td><input class="form-control" type="text" ng-model="searchForEmail" placeholder="Email"/></td>
+				<td><input class="form-control" type="text" ng-model="searchForPhone" placeholder="Phone"/></td>
+				<td><input class="form-control" type="text" ng-model="searchForUsername" placeholder="Username"/></td>
+				<td><input class="form-control" type="text" ng-model="searchForWebsite" placeholder="Website"/></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
 			<tr>
 				<th class="text-center">Id</th>
 				<th class="text-center">Name</th>
@@ -70,10 +142,17 @@
 				<th class="text-center">Website</th>
 				<th class="text-center"></th>
 				<th class="text-center"></th>
+				<th class="text-center"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat-start="c in contacts">
+			<tr ng-repeat-start="c in contacts | filter:{
+			    id: searchForId, 
+			    name: searchForName,
+			    email: searchForEmail,
+			    phone: searchForPhone,
+			    username: searchForUsername,
+			    website: searchForWebsite }">
 				<td>{{ c.id }}</td>
 				<td>{{ c.name }}</td>	
 				<td>{{ c.email }}</td>

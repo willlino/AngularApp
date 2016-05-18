@@ -1,0 +1,30 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th class="text-center">Id</th>
+			<th class="text-center">Title</th>
+			<th class="text-center">Node</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat-start="n in treeNodes" id="row{{ n.id }}">
+			<td>{{ n.id }}</td>
+			<td>{{ n.title }}</td>
+			<td>{{ n.nodes }}</td>
+		</tr>
+		<!-- <tr ng-if="n.hasOwnProperty(childrenName) && n.nodes.length > 0" ng-repeat-end>
+			<td>
+				<my-tree tree-data="n.nodes" children-name="chidrenName"></my-tree>		
+			</td>
+		</tr> -->
+		<tr ng-repeat-end><td></td></tr>
+	</tbody>
+</table>
+
+<!-- 
+<p>{{ family.name }}</p>
+<ul>  
+    <li ng-repeat="node in treeNodes.nodes">  
+        <my-tree tree-data="node" children-name="chidrenName"></my-tree> 
+    </li> 
+</ul> -->

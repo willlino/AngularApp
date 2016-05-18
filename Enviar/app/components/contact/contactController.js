@@ -50,11 +50,18 @@
 		}
 
 		function saveContact(){
+			if($scope.contactForm.$invalid)
+				return;
+
+			console.log($scope.contact.id);	
 			// If don't have an id, insert a new contact, else update
-			if($scope.contact.id == ''){
+			if($scope.contact.id == undefined || $scope.contact.id == ''){
 				ContactRepository.post($scope.contact)
 				.then(function(data){
-					console.log(data);
+					console.log('The API does not allow to insert/update items');
+					delete $scope.contact;
+					setFormsToPristine();
+					showHideContactForm();
 					$scope.contacts = getContacts();
 				}, function(error){
 					console.log(error);
@@ -62,7 +69,9 @@
 			}else{
 				ContactRepository.put($scope.contact)
 				.then(function(data){
-					console.log(data);
+					console.log('The API does not allow to insert/update items');
+					delete $scope.contact;
+					showHideContactForm();
 					$scope.contacts = getContacts();
 				}, function(error){
 					console.log(error);
@@ -82,7 +91,7 @@
 
 			ContactRepository.delete($scope.contact)
 				.then(function(data){
-					console.log(data);
+					console.log('The API does not allow to remove data');
 					$scope.contacts = getContacts();
 				}, function(error){
 					console.log(error);
@@ -91,16 +100,7 @@
 
 		// Show form to add contact
 		function addContact(){
-			$scope.contact = {
-				id: "",
-				name: "",
-				email: "",
-				phone: "",
-			    username: "",
-				website: "",
-				address: {},
-				company: {}
-			};
+			delete $scope.contact;
 
 			showHideContactForm();
 		}
@@ -120,7 +120,6 @@
 
 			$scope.contactFormVisible = true;
 			$scope.btnAddContactText = "Cancel";
-			console.log(contact);
 		}
 
 		function showHideContactForm(){
@@ -151,6 +150,12 @@
 			var showCompanyId = 'showCompany' + id;
 
 			$scope[showCompanyId] = !$scope[showCompanyId];
+		}
+
+		function setFormsToPristine(){
+			$scope.contactForm.$setPristine();
+			$scope.addressForm.$setPristine();
+			$scope.companyForm.$setPristine();
 		}
 	});
 })();

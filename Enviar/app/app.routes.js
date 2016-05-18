@@ -13,7 +13,7 @@
 		  	controllerAs:'vm',
 		  	templateUrl: 'app/components/home/homeView.html'
 		  })
-		  .when('/contact',{
+		  .when('/contact', {
 		  	controller:'ContactController',
 		  	controllerAs:'vm',
 		  	templateUrl:'app/components/contact/contactView.html'
