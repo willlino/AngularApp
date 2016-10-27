@@ -80,7 +80,7 @@
 		}
 
 		function deleteContact(contact){
-			$scope.contact = {
+			$scope.contact = { 
 				id: contact.id,
 				name: contact.name,
 				email: contact.email,
